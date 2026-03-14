@@ -1,29 +1,23 @@
 [project]
-name = "learning-management-service"
+name = "se-toolkit-lab-6"
 version = "0.1.0"
-description = "Learning Management Service"
-readme = "README.md"
-requires-python = "==3.14.2"
+description = "SE Toolkit Lab 6"
+requires-python = ">=3.10"
 dependencies = [
-  "asyncpg>=0.30.0",
-  "fastapi==0.128.7",
-  "httpx==0.28.1",
-  "pydantic==2.12.5",
-  "pydantic-settings==2.12.0",
-  "sqlmodel>=0.0.22",
-  "uvicorn[standard]==0.40.0",
+    "requests>=2.31.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [dependency-groups]
 dev = [
-  "aiosqlite>=0.21.0",
-  "greenlet>=3.2.0",
-  "poethepoet>=0.40.0",
-  "pyright==1.1.408",
-  "pytest==9.0.2",
-  "pytest-asyncio>=0.25.0",
-  "ruff==0.14.14",
-  "ty==0.0.13",
+    "aiosqlite>=0.21.0",
+    "greenlet>=3.2.0",
+    "poethepoet>=0.40.0",
+    "pyright==1.1.408",
+    "pytest==9.0.2",
+    "pytest-asyncio>=0.25.0",
+    "ruff==0.14.14",
+    "ty==0.0.13",
 ]
 
 [tool.ruff.lint]
@@ -33,7 +27,6 @@ select = ["RET503"]
 # Run server
 
 ## Check code and run server in dev mode
-
 [tool.poe.tasks.dev]
 help = "Run server after static analysis"
 sequence = ["check", "dev-unsafe"]
@@ -46,13 +39,11 @@ cmd = "python backend/app/run.py"
 # Run static analysis
 
 ## Run all tools
-
 [tool.poe.tasks.check]
 help = "Format, lint, typecheck"
 sequence = ["format", "lint", "typecheck"]
 
 ## Typecheck
-
 [tool.poe.tasks.typecheck]
 help = "Run all typecheckers"
 parallel = ["ty-check", "pyright-check"]
@@ -66,13 +57,11 @@ help = "Run the 'pyright' typechecker"
 cmd = "pyright"
 
 ## Lint
-
 [tool.poe.tasks.lint]
 help = "Run the 'ruff' linter"
 cmd = "ruff check"
 
 ## Format
-
 [tool.poe.tasks.format]
 help = "Run the 'ruff' formatter"
 cmd = "ruff format"
@@ -80,7 +69,6 @@ cmd = "ruff format"
 # Run dynamic analysis
 
 ## Run tests
-
 [tool.poe.tasks.test]
 help = "Run all tests"
 sequence = ["test-unit", "test-e2e"]
